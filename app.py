@@ -50,7 +50,7 @@ uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png
 image = ""   
 if uploaded_file is not None:
     image = Image.open(uploaded_file)
-    st.image(image, caption="Uploaded Image.", use_container_width=True)
+    st.image(image, caption="Uploaded Image.", width=300)
 
 
 submit = st.button("Identify Species Name")  # Button text is the same as the input text
@@ -205,7 +205,10 @@ The Abu Dhabi Red List of Species 280  Taxa Order Family  Scientific Name  Commo
 
 ## If ask button is clicked
 if submit:
-    image_data = input_image_setup(uploaded_file)
-    response = get_gemini_response(input_prompt, image_data, input)
-    st.subheader("The Response is")
-    st.write(response)
+    if uploaded_file is None:
+        st.warning("Please upload an image first before clicking the 'Identify Species Name' button.")
+    else:
+        image_data = input_image_setup(uploaded_file)
+        response = get_gemini_response(input_prompt, image_data, input)
+        st.subheader("The Response is")
+        st.write(response)
