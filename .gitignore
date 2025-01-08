@@ -8,3 +8,5 @@ env/
 
 # Ignore Streamlit's temporary files
 .streamlit/
+
+.env
